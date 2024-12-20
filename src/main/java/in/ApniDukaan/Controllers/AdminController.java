@@ -39,7 +39,6 @@ public class AdminController {
     private final OrderService orderService;
     private final CommonUtils commonUtil;
     private final PasswordEncoder passwordEncoder;
-    private final FileService fileService;
 
     @ModelAttribute
     public void getUserDetails(Principal p, Model m) {
@@ -103,14 +102,14 @@ public class AdminController {
             if (ObjectUtils.isEmpty(saveCategory)) {
                 session.setAttribute("errorMsg", "Not saved ! internal server error");
             } else {
-//                File saveFile = new ClassPathResource("static/img").getFile();
-//                Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + "category_img" + File.separator
-//                        + file.getOriginalFilename());
-//
-//                // System.out.println(path);
-//                Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-                fileService.uploadFileToAwsS3(file, 1);
-                session.setAttribute("succMsg", "Saved successfully");
+                File saveFile = new ClassPathResource("static/img").getFile();
+                Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + "category_img" + File.separator
+                        + file.getOriginalFilename());
+
+                // System.out.println(path);
+                Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+//                fileService.uploadFileToAwsS3(file, 1);
+//                session.setAttribute("succMsg", "Saved successfully");
             }
         }
         return "redirect:/admin/category";
@@ -161,7 +160,6 @@ public class AdminController {
 
                 // System.out.println(path);
                 Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-                fileService.uploadFileToAwsS3(file, 1);
             }
 
             session.setAttribute("succMsg", "Category update success");
@@ -185,14 +183,14 @@ public class AdminController {
 
         if (!ObjectUtils.isEmpty(saveProduct)) {
 
-//            File saveFile = new ClassPathResource("static/img").getFile();
-//
-//            Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + "product_img" + File.separator
-//                    + image.getOriginalFilename());
-//
-//            // System.out.println(path);
-//            Files.copy(image.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-            fileService.uploadFileToAwsS3(image, 2);
+            File saveFile = new ClassPathResource("static/img").getFile();
+
+            Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + "product_img" + File.separator
+                    + image.getOriginalFilename());
+
+            // System.out.println(path);
+            Files.copy(image.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+        //    fileService.uploadFileToAwsS3(image, 2);
 
             session.setAttribute("succMsg", "Product Saved Success");
         } else {
@@ -383,14 +381,14 @@ public class AdminController {
 
         if (!ObjectUtils.isEmpty(saveUser)) {
             if (!file.isEmpty()) {
-//                File saveFile = new ClassPathResource("static/img").getFile();
-//
-//                Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + "profile_img" + File.separator
-//                        + file.getOriginalFilename());
-//
-////				System.out.println(path);
-//                Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-                fileService.uploadFileToAwsS3(file, 3);
+                File saveFile = new ClassPathResource("static/img").getFile();
+
+                Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + "profile_img" + File.separator
+                        + file.getOriginalFilename());
+
+//				System.out.println(path);
+                Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+              //  fileService.uploadFileToAwsS3(file, 3);
             }
             session.setAttribute("succMsg", "Register successfully");
         } else {

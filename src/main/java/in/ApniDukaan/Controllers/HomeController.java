@@ -40,7 +40,7 @@ public class HomeController {
     private final CommonUtils commonUtil;
     private BCryptPasswordEncoder passwordEncoder;
     private final CartService cartService;
-    private final FileService fileService;
+   // private final FileService fileService;
 
     @ModelAttribute
     public void getUserDetails(Principal p, Model m) {
@@ -132,13 +132,13 @@ public class HomeController {
 
             if (!ObjectUtils.isEmpty(saveUser)) {
                 if (!file.isEmpty()) {
-//                    File saveFile = new ClassPathResource("static/img").getFile();
-//
-//                    Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + "profile_img" + File.separator
-//                            + file.getOriginalFilename());
-////					System.out.println(path);
-//                    Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-                    fileService.uploadFileToAwsS3(file, 3);
+                    File saveFile = new ClassPathResource("static/img").getFile();
+
+                    Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + "profile_img" + File.separator
+                            + file.getOriginalFilename());
+//					System.out.println(path);
+                    Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+                   // fileService.uploadFileToAwsS3(file, 3);
                 }
                 session.setAttribute("succMsg", "Register successfully");
             } else {

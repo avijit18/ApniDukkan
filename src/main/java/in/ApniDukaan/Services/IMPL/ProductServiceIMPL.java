@@ -2,7 +2,6 @@ package in.ApniDukaan.Services.IMPL;
 
 import in.ApniDukaan.Entities.Product;
 import in.ApniDukaan.Repositories.ProductRepository;
-import in.ApniDukaan.Services.Interfaces.FileService;
 import in.ApniDukaan.Services.Interfaces.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ClassPathResource;
@@ -25,7 +24,7 @@ import java.util.List;
 public class ProductServiceIMPL implements ProductService {
 
     private final ProductRepository productRepository;
-    private final FileService fileService;
+   // private final FileService fileService;
 
     @Override
     public Product saveProduct(Product product) {
@@ -84,7 +83,7 @@ public class ProductServiceIMPL implements ProductService {
                             "product_img" + File.separator
                             + image.getOriginalFilename());
                     Files.copy(image.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-                    fileService.uploadFileToAwsS3(image, 2);
+                   // fileService.uploadFileToAwsS3(image, 2);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

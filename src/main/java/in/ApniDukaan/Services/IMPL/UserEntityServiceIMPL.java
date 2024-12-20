@@ -2,7 +2,6 @@ package in.ApniDukaan.Services.IMPL;
 
 import in.ApniDukaan.Entities.UserEntity;
 import in.ApniDukaan.Repositories.UserRepository;
-import in.ApniDukaan.Services.Interfaces.FileService;
 import in.ApniDukaan.Services.Interfaces.UserEntityService;
 import in.ApniDukaan.Utils.AppConstant;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +26,7 @@ public class UserEntityServiceIMPL implements UserEntityService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final FileService fileService;
+    //private final FileService fileService;
 
     @Override
     public UserEntity saveUser(UserEntity user) {
@@ -143,7 +142,7 @@ public class UserEntityServiceIMPL implements UserEntityService {
 
 //			System.out.println(path);
                 Files.copy(img.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-                fileService.uploadFileToAwsS3(img, 3);
+               // fileService.uploadFileToAwsS3(img, 3);
             }
         } catch (Exception e) {
             e.printStackTrace();
